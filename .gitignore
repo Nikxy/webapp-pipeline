@@ -4,4 +4,11 @@ __pycache__
 
 # Terraform
 *.tfplan
-.terraform.tfstate
+*.tfstate
+*.tfstate.*
+# Local .terraform directories
+**/.terraform/*
+
+# Exclude .tfvars files, which are likely to contain sensitive data.
+*.tfvars
+*.tfvars.json

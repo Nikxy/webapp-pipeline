@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>🌤️ Weather Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Weather forecast:</h1>
+        <form method="get">
+            <div class="input-group input-group-lg mt-4">
+                <input class="shadow form-control" name="search" value="{{ search }}"/>
+                <input class="shadow btn btn-outline-primary" type="submit" value="Search">
+            </div>
+        </form>
+    {% if forecast is defined %}
+        {% if forecast == None %}
+        <div class="display-6 mt-4">
+            <i class="fa-solid fa-heart-crack"></i> Not Found
+        </div>
+        {% else %}
+        <div class="row mt-5">
+            <h4><i class="fa-solid fa-location-dot"></i> {{ forecast.geocoding.name }}, {{ forecast.geocoding.country }}</h4>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8" style="margin:auto">
+                <div class="text-primary weather-icon">
+                    {{ forecast.getWeatherEmoji(forecast.current.weather_code) }}
+                </div>
+                <div class="day-card current shadow">
+                    <div class="rounded content p-4 text-nowrap">
+                        <span class="d-block week-day">
+                            Current
+                        </span>
+                        <div class="row mt-2">
+                            <div class="col-2 p-0">
+                                <i class="fa-solid fa-temperature-three-quarters"></i>
+                            </div>
+                            <div class="col-6 p-0 text-start">
+                                Temperature:
+                            </div>
+                            <div class="col-4 p-0 text-start">
+                                {{ forecast.current.temp }}°C
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-2 p-0">
+                                 <i class="fa-solid fa-droplet"></i>
+                            </div>
+                            <div class="col-6 p-0 text-start">
+                                Humidity:
+                            </div>
+                            <div class="col-4 p-0 text-start">
+                                {{ forecast.current.humidity }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if message is defined and message is not none %}
+        <h2>{{ message }}</h2>
+        {% endif %}
+        <div class="d-flex flex-wrap justify-content-center">
+            {% for day in forecast.days %}
+                <div class="m-2">
+                    <div class="text-primary weather-icon">
+                        {{ forecast.getWeatherEmoji(day.weather_code) }}
+                    </div>
+                    <div class="day-card shadow">
+                        <div class="rounded content p-4 text-nowrap">
+                            <span class="d-block week-day">
+                                {{ day.date.strftime("%A") }}
+                            </span>
+                            <small class="date">
+                                {{ day.date.strftime("%d/%m") }}
+                            </small>
+
+                            <div class="row mt-2">
+                                <div class="col-2 p-0">
+                                    <i class="fa-solid fa-sun"></i>
+                                </div>
+                                <div class="col-4 p-0 text-start">
+                                    {{ day.max_temp }}°C
+                                </div>
+                                <div class="col-2 p-0">
+                                    <i class="fa-solid fa-moon"></i>
+                                </div>
+                                <div class="col-4 p-0 text-start">
+                                    {{ day.min_temp }}°C
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-2 p-0">
+                                     <i class="fa-solid fa-droplet"></i>
+                                </div>
+                                <div class="col-6 p-0 text-start">
+                                    Humidity:
+                                </div>
+                                <div class="col-4 p-0 text-start">
+                                    {{ day.average_humidity }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endif %}
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/da7873b765.js" crossorigin="anonymous"></script>
+</body>
+</html>
+<!-- Hello World! -->

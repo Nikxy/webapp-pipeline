@@ -1,0 +1,45 @@
+html, body {
+    background: #fcfcfc;
+    color:#333;
+}
+main {
+    padding-top: 5vh;
+    max-width: 80vw;
+    margin:auto;
+    text-align:center;
+}
+main form {
+    margin:auto;
+    max-width:500px;
+    width:100%
+}
+.day-card {
+    flex:0 1 auto;
+    background: linear-gradient(45deg, rgba(130,123,255,.9) 0%, rgba(0,212,255,.9) 100%);
+    min-width:190px;
+
+
+    overflow:hidden;
+    margin-top: -3.5em !important;
+    z-index: auto;
+    border-radius: calc(var(--bs-border-radius)*2) !important;
+}
+.day-card .content {
+    margin: .5em;
+    padding-top: 2.5em !important;
+    background: #fafafa;
+    /*border: .5em solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, rgba(130,123,255,.9) 0%, rgba(0,212,255,.9) 100%);*/
+}
+.weather-icon {
+    font-size:4.5em;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.3));
+    z-index: 9999;
+}
+.day-card .week-day {
+    font-size:1.5em;
+}
+.day-card .date {
+    font-weight:400
+}

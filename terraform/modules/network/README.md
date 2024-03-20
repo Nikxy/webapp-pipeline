@@ -29,6 +29,7 @@ Total creating:
 |           |            |           |                                                 |
 | Ingres    | 8000       | VPC       | Allow traffic from Load Balancer                |
 | Egress    | 1024-65535 | VPC       | Allow return traffic to Load Balancer           |
+
 The network ACL is set for the private subnets.
 
 ### Route Tables
@@ -37,10 +38,12 @@ The network ACL is set for the private subnets.
 | --------- | ---------------- |
 | 0.0.0.0/0 | Internet gateway |
 | VPC Cidr  | local            |
+
 For public subnets.
 
 | Cidr      | Gateway     |
 | --------- | ----------- |
 | 0.0.0.0/0 | Nat gateway |
 | VPC Cidr  | local       |
+
 For private subnets

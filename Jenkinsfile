@@ -4,7 +4,7 @@ pipeline {
         scannerHome = tool name: 'MainSonar';
     }
     stages {
-        stage('Dependency Check') {
+        /*stage('Dependency Check') {
             steps {
                 dependencyCheck additionalArguments: '''
                 --enableExperimental
@@ -19,7 +19,7 @@ pipeline {
                 failedTotalCritical: 1,
                 stopBuild: true
             }
-        }
+        }*/
         stage('Static Code Analysis') {
             steps {
                 

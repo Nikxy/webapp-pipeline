@@ -23,7 +23,7 @@ pipeline {
         stage('Static Code Analysis') {
             steps {
                 
-                withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
+                withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube", projectKey: "WebApp") {
                     dir("app/") {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }

@@ -8,22 +8,6 @@ pipeline {
         DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE = credentials('DOCKER_TRUST_ROOT_PASS')
     }
     stages {
-        /*stage('Dependency Check') {
-            steps {
-                dependencyCheck additionalArguments: '''
-                --enableExperimental
-                --scan 'app/'
-                -f 'XML'
-                --prettyPrint''',
-                odcInstallation: 'dependency-check',
-                nvdCredentialsId: 'NVD-API-KEY',
-                stopBuild: true
-
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml',
-                failedTotalCritical: 1,
-                stopBuild: true
-            }
-        }*/
         stage('Static Code Analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
@@ -39,7 +23,7 @@ pipeline {
                 sh 'docker build -t $IMAGE_NAME:test .'
             }
         }
-        stage('Scan Image'){
+        stage('Scan Image and Dependencies'){
             steps {
                 withCredentials([string(credentialsId: 'snyk-api-key', variable: 'TOKEN')]) {
                     sh '$SNYK_HOME/snyk-linux auth $TOKEN'

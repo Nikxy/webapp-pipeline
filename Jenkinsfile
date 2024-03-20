@@ -4,6 +4,8 @@ pipeline {
         SCANNER_HOME = tool name: 'MainSonar';
         SNYK_HOME = tool name: 'snyk'
         IMAGE_NAME = "nikxy/webapp"
+        DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE = credentials('DOCKER_TRUST_REPOSITORY_PASS')
+        DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE = credentials('DOCKER_TRUST_ROOT_PASS')
     }
     stages {
         /*stage('Dependency Check') {

@@ -3,7 +3,9 @@ pipeline {
     environment {
         SCANNER_HOME = tool name: 'MainSonar';
         SNYK_HOME = tool name: 'snyk'
+        TERRAFORM_HOME = tool name: 'Terraform'
         IMAGE_NAME = "nikxy/webapp"
+        AWS_REGION = 'il-central-1'
         DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE = credentials('DOCKER_TRUST_REPOSITORY_PASS')
         DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE = credentials('DOCKER_TRUST_ROOT_PASS')
     }
@@ -68,6 +70,21 @@ pipeline {
                 sh 'docker push $IMAGE_NAME'
                 sh 'docker trust sign $IMAGE_NAME:latest'
                 sh 'docker logout'
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh '$TERRAFORM_HOME/terraform init'
+            }
+        }
+        stage('Terraform apply') {
+            steps {
+                withCredentials([AmazonWebServicesCredentialsBinding(
+                    credentialsId: 'webapp-aws',
+                    keyIdVariable: 'AWS_ACCESS_KEY_ID',
+                    secretVariable: 'AWS_SECRET_ACCESS_KEY'                
+                    sh '$TERRAFORM_HOME/terraform apply --auto-approve'
+                )])
             }
         }
     }

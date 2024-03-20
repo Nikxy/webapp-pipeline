@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        scannerHome = tool name: 'MainSonar';
+    }
     stages {
         stage('Dependency Check') {
             steps {
@@ -20,7 +22,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
             steps {
-                def scannerHome = tool 'MainSonar';
+                
                 withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
                     dir("app/") {
                         sh "${scannerHome}/bin/sonar-scanner"

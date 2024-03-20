@@ -25,10 +25,8 @@ pipeline {
                 withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app -Dsonar.python.version=3"
                 }
-                steps {
-                    timeout(time: 2, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
-                    }
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }

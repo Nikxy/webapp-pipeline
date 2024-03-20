@@ -81,8 +81,8 @@ pipeline {
             steps {
                 withCredentials([aws(
                     credentialsId: 'webapp-aws',
-                    keyIdVariable: 'AWS_ACCESS_KEY_ID',
-                    secretVariable: 'AWS_SECRET_ACCESS_KEY'                
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'                
                 )]) {
                     sh '$TERRAFORM_HOME/terraform apply --auto-approve'
                 }

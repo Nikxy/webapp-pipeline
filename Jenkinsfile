@@ -79,7 +79,7 @@ pipeline {
         }
         stage('Terraform apply') {
             steps {
-                withCredentials([AmazonWebServicesCredentialsBinding(
+                withCredentials([aws(
                     credentialsId: 'webapp-aws',
                     keyIdVariable: 'AWS_ACCESS_KEY_ID',
                     secretVariable: 'AWS_SECRET_ACCESS_KEY'                

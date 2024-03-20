@@ -46,7 +46,10 @@ pipeline {
                     publishHTML([
                         reportName: 'Snyk Results',
                         reportDir: './',
-                        reportFiles: 'snyk-output.html'
+                        reportFiles: 'snyk-output.html',
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true
                     ])
                 }
             }

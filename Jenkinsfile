@@ -22,16 +22,12 @@ pipeline {
         }*/
         stage('Static Code Analysis') {
             steps {
-                
                 withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app -Dsonar.python.version=3"
                 }
-                timeout(time: 2, unit: 'MINUTES') {
-                    script {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
+                steps {
+                    timeout(time: 2, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }

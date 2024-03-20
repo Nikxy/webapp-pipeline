@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        scannerHome = tool name: 'MainSonar';
+        SCANNER_HOME = tool name: 'MainSonar';
+        SNYK_HOME = tool name: 'snyk'
         IMAGE_NAME = "nikxy/webapp"
     }
     stages {
@@ -24,7 +25,7 @@ pipeline {
         stage('Static Code Analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app -Dsonar.python.version=3"
+                    sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app -Dsonar.python.version=3"
                 }
                 timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true

@@ -23,10 +23,8 @@ pipeline {
         stage('Static Code Analysis') {
             steps {
                 
-                withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube", projectKey: "WebApp") {
-                    dir("app/") {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
+                withSonarQubeEnv(installationName: 'MainSonar', credentialsId: "Sonarqube") {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=WebApp -Dsonar.sources=./app"
                 }
                 timeout(time: 2, unit: 'MINUTES') {
                     script {

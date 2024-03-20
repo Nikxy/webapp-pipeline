@@ -83,8 +83,9 @@ pipeline {
                     credentialsId: 'webapp-aws',
                     keyIdVariable: 'AWS_ACCESS_KEY_ID',
                     secretVariable: 'AWS_SECRET_ACCESS_KEY'                
+                )]) {
                     sh '$TERRAFORM_HOME/terraform apply --auto-approve'
-                )])
+                }
             }
         }
     }

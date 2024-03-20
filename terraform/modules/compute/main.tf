@@ -11,7 +11,7 @@ resource "aws_launch_template" "deployment" {
   sudo yum -y install docker
   sudo service docker start
   sudo usermod -a -G docker ec2-user
-  
+  export DOCKER_CONTENT_TRUST=1
   sudo docker run --rm --name webapp -d -p 8000:8000 ${var.image_url}
   EOT
   )

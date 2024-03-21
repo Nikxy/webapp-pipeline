@@ -74,8 +74,14 @@ pipeline {
         }
         stage('Terraform init') {
             steps {
-                dir("terraform/deployment") {
-                    sh '$TERRAFORM_HOME/terraform init'
+                withCredentials([aws(
+                    credentialsId: 'webapp-aws',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'                
+                )]) {
+                    dir("terraform/deployment") {
+                        sh '$TERRAFORM_HOME/terraform init'
+                    }
                 }
             }
         }

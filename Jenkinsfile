@@ -29,17 +29,9 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'snyk-api-key', variable: 'TOKEN')]) {
                     sh '$SNYK_HOME/snyk-linux auth $TOKEN'
-                    sh '$SNYK_HOME/snyk-linux container test $IMAGE_NAME:test --file=Dockerfile --json-file-output=snyk-output.json --severity-threshold=high'
-                    sh '$SNYK_HOME/snyk-to-html-linux -i snyk-output.json -o snyk-output.html'
-                    publishHTML([
-                        reportName: 'Snyk Results',
-                        reportDir: './',
-                        reportFiles: 'snyk-output.html',
-                        allowMissing: true,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true
-                    ])
                 }
+                script { def snyk_scan = true }
+                sh '$SNYK_HOME/snyk-linux container test $IMAGE_NAME:test --file=Dockerfile --json-file-output=snyk-output.json --severity-threshold=high'
             }
         }
         stage('Test Image') {
@@ -98,6 +90,23 @@ pipeline {
                             sh '$TERRAFORM_HOME/terraform apply --auto-approve -var-file=$TERRAFORM_VARS'
                         }
                     }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                if(snyk_scan){
+                    sh '$SNYK_HOME/snyk-to-html-linux -i snyk-output.json -o snyk-output.html'
+                    publishHTML([
+                        reportName: 'Snyk Results',
+                        reportDir: './',
+                        reportFiles: 'snyk-output.html',
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true
+                    ])
                 }
             }
         }

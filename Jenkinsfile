@@ -87,7 +87,7 @@ pipeline {
                     dir("terraform/deployment") {
                         configFileProvider(
                             [configFile(fileId:'terraform-input-variables', variable:'TERRAFORM_VARS')]) {
-                            sh '$TERRAFORM_HOME/terraform apply --auto-approve -var-file=$TERRAFORM_VARS'
+                            sh '$TERRAFORM_HOME/terraform apply --auto-approve -var-file=$TERRAFORM_VARS -var app_image="$IMAGE_NAME:build-$BUILD_NUMBER"'
                         }
                     }
                 }

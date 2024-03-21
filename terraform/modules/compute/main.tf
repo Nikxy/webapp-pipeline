@@ -57,6 +57,11 @@ resource "aws_autoscaling_group" "deployment" {
     value               = "webapp"
     propagate_at_launch = true
   }
+  tag {
+    key                 = "Image"
+    value               = ${var.image_url}
+    propagate_at_launch = true
+  }
 }
 
 

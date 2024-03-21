@@ -13,7 +13,7 @@ Backand is configured and created in [Backend](../backend/README.md)
 | app_name               | App name for tagging and resource names prefix |
 | app_domain             | Domain to use in certficate                    |
 | aws_region             | AWS Region to use                              |
-| aws_availability_zones | Availability Zones to use                      |
+| aws_availability_zones | Availability Zones to use **\* At least 2 AZs required**|
 | vpc_cidr               | The Cidr to use in VPC                         |
 | app_image              | The name of the image to use in deployment     |
 

@@ -16,7 +16,9 @@ Required properties:
 
 ## Infrastructure
 Terraform is used for managing the infrastructure using modules.  
-Using availability zones input variable you can slecet in which AZs the infrastructure will be created.
+Backend used, saving state in S3 and lock in DynamoDB.  
+Using availability zones input variable you can select in which AZs the infrastructure will be created.  
+[Deployment README](terraform/deployment/README.md)
 #### Network: [README](terraform/modules/network/README.md)
 * VPC
 * Private and public subnets for specified availability zones

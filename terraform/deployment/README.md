@@ -6,7 +6,7 @@ The main Terraform configuration which uses the modules:
 * [WAF](../modules/waf/README.md)
 * [Compute](../modules/compute/README.md)
 
-Backand is configured and created in [Backend](../backend/README.md)
+Backend is configured and created in [Backend](../backend/README.md)
 ### Input Variables
 
 | Key                    | Description                                    |

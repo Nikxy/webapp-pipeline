@@ -74,7 +74,9 @@ pipeline {
         }
         stage('Terraform init') {
             steps {
-                sh '$TERRAFORM_HOME/terraform init'
+                dir("terraform/deployment") {
+                    sh '$TERRAFORM_HOME/terraform init'
+                }
             }
         }
         stage('Terraform apply') {
@@ -84,7 +86,9 @@ pipeline {
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'                
                 )]) {
-                    sh '$TERRAFORM_HOME/terraform apply --auto-approve'
+                    dir("terraform/deployment") {
+                        sh '$TERRAFORM_HOME/terraform apply --auto-approve'
+                    }
                 }
             }
         }

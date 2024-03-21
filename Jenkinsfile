@@ -93,7 +93,9 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'                
                 )]) {
                     dir("terraform/deployment") {
-                        sh '$TERRAFORM_HOME/terraform apply --auto-approve'
+                        configFileProvider([fileId:'terraform-input-variables', variable:'TERRAFORM_VARS']) {
+                            sh '$TERRAFORM_HOME/terraform apply --auto-approve -var-file=$TERRAFORM_VARS'
+                        }
                     }
                 }
             }

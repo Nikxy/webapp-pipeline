@@ -21,7 +21,7 @@ Creates and attaches the ALB to the auto scaling group.
 
 ### Security Group
 
-| Direction | Ports      | Cidr      | Description                           |
-| --------- | ---------- | --------- | ------------------------------------- |
-| Ingress   | 443        | 0.0.0.0/0 | Allow HTTPS traffic                   |
-| Egress    | 8000       | VPC       | Allow accessing the app               |
+| Direction | Protocol | Ports      | Cidr      | Description                           |
+| --------- | -------- | ---------- | --------- | ------------------------------------- |
+| Ingress   | TCP | 443        | 0.0.0.0/0 | Allow HTTPS traffic                   |
+| Egress    | TCP | 8000       | VPC       | Allow accessing the app               |

@@ -19,7 +19,7 @@ Creates the Instance Template, Auto Scaling Group and Security Group required fo
 
 ### Security Group
 
-| Direction | Ports | Cidr      | Description                                          |
-| --------- | ----- | --------- | ---------------------------------------------------- |
-| Ingress   | 8000  | VPC       | Allow traffic from ALB to app                        |
-| Egress    | 443   | 0.0.0.0/0 | Allow accessing the internet for API, yum and Docker |
+| Direction | Protocol | Ports | Cidr      | Description                                          |
+| --------- | -------- | ----- | --------- | ---------------------------------------------------- |
+| Ingress   | TCP | 8000  | VPC       | Allow traffic from ALB to app                        |
+| Egress    | TCP | 443   | 0.0.0.0/0 | Allow accessing the internet for API, yum and Docker |

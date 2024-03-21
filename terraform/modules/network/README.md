@@ -22,13 +22,13 @@ Total creating:
 
 ### Network ACL
 
-| Direction | Ports      | Cidr      | Description                                     |
-| --------- | ---------- | --------- | ----------------------------------------------- |
-| Egress    | 443        | 0.0.0.0/0 | Allow HTTPS traffic out for API, yum and Docker |
-| Ingress   | 32768-6100 | 0.0.0.0/0 | Allow return traffic for above rule             |
+| Direction | Protocol | Ports      | Cidr      | Description                                     |
+| --------- | -------- | ---------- | --------- | ----------------------------------------------- |
+| Egress    | TCP | 443        | 0.0.0.0/0 | Allow HTTPS traffic out for API, yum and Docker |
+| Ingress   | TCP | 32768-6100 | 0.0.0.0/0 | Allow return traffic for above rule             |
 |           |            |           |                                                 |
-| Ingres    | 8000       | VPC       | Allow traffic from Load Balancer                |
-| Egress    | 1024-65535 | VPC       | Allow return traffic to Load Balancer           |
+| Ingres    | TCP | 8000       | VPC       | Allow traffic from Load Balancer                |
+| Egress    | TCP | 1024-65535 | VPC       | Allow return traffic to Load Balancer           |
 
 The network ACL is set for the private subnets.
 

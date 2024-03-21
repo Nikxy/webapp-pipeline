@@ -1,3 +1,4 @@
+def snyk_scan = false
 pipeline {
     agent any
     environment {
@@ -30,7 +31,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'snyk-api-key', variable: 'TOKEN')]) {
                     sh '$SNYK_HOME/snyk-linux auth $TOKEN'
                 }
-                script { def snyk_scan = true }
+                script { snyk_scan = true }
                 sh '$SNYK_HOME/snyk-linux container test $IMAGE_NAME:test --file=Dockerfile --json-file-output=snyk-output.json --severity-threshold=high'
             }
         }

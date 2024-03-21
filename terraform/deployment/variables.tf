@@ -8,6 +8,12 @@ variable "app_domain" {
   description = "Domain name to create a certificate for"
 }
 
+variable "aws_region" {
+  type = string
+  description = "The aws region to use"
+  default = "il-central-1"
+}
+
 variable "aws_availability_zones" {
   type        = list(string)
   default     = ["il-central-1a", "il-central-1b"] //,"il-central-1c"]

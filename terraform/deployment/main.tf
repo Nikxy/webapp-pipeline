@@ -33,4 +33,5 @@ module "compute" {
   vpc_id     = module.network.vpc_id
   subnets    = module.network.private_subnets
   ingress_sg = module.alb.lb_sg
+  image_url  = var.app_image
 }

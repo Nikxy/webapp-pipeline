@@ -1,4 +1,4 @@
-# Secure Webapp pipeline
+# Secure Webapp Pipeline
 The project was created as a home assigment.  
 Required properties:
 * Secure cloud deployment
@@ -12,7 +12,7 @@ Required properties:
 * **Jenkins** - CI/CD
 * **Docker** - For creating images and running containers on deployment
 * **SonarCube** - Static code analysis
-* **Snyk** - Dependencies and image vulnarability scan
+* **Snyk** - Dependencies and image vulnerability scan
 
 ## Infrastructure
 Terraform is used for managing the infrastructure using modules.  
